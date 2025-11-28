@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Kanban Board</h1>
+        <div class="board-controls">
+            <button id="create-board-btn" class="btn btn-primary" aria-label="Create new board">
+                + New Board
+            </button>
+            <select id="board-selector" aria-label="Select board">
+                <option value="">-- Select Board --</option>
+            </select>
+            <button id="delete-board-btn" class="btn btn-danger" aria-label="Delete current board" disabled>
+                Delete Board
+            </button>
+        </div>
+    </header>
+
+    <main class="main-content" role="main">
+        <div id="board-container" class="board-container" aria-live="polite">
+            <p class="empty-state">Create a new board to get started!</p>
+        </div>
+        <button id="add-column-btn" class="btn btn-secondary add-column-btn" aria-label="Add new column" style="display: none;">
+            + Add Column
+        </button>
+    </main>
+
+    <!-- Board Modal -->
+    <div id="board-modal" class="modal" role="dialog" aria-labelledby="board-modal-title" aria-modal="true" hidden>
+        <div class="modal-content">
+            <h2 id="board-modal-title">Create New Board</h2>
+            <form id="board-form">
+                <label for="board-name">Board Name:</label>
+                <input type="text" id="board-name" name="board-name" required autocomplete="off">
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-board-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Column Modal -->
+    <div id="column-modal" class="modal" role="dialog" aria-labelledby="column-modal-title" aria-modal="true" hidden>
+        <div class="modal-content">
+            <h2 id="column-modal-title">Add Column</h2>
+            <form id="column-form">
+                <label for="column-name">Column Name:</label>
+                <input type="text" id="column-name" name="column-name" required autocomplete="off">
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-column-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Card Modal -->
+    <div id="card-modal" class="modal" role="dialog" aria-labelledby="card-modal-title" aria-modal="true" hidden>
+        <div class="modal-content">
+            <h2 id="card-modal-title">Add Card</h2>
+            <form id="card-form">
+                <label for="card-title">Card Title:</label>
+                <input type="text" id="card-title" name="card-title" required autocomplete="off">
+                <label for="card-description">Description (optional):</label>
+                <textarea id="card-description" name="card-description" rows="3"></textarea>
+                <input type="hidden" id="card-column-id" name="card-column-id">
+                <input type="hidden" id="card-id" name="card-id">
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-card-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Keyboard Instructions -->
+    <div class="keyboard-instructions" aria-live="polite">
+        <details>
+            <summary>Keyboard Shortcuts</summary>
+            <ul>
+                <li><kbd>Tab</kbd> - Navigate between elements</li>
+                <li><kbd>Enter</kbd> / <kbd>Space</kbd> - Select/activate element</li>
+                <li><kbd>Arrow Keys</kbd> - Move selected card between columns</li>
+                <li><kbd>Escape</kbd> - Close modals or cancel drag</li>
+                <li><kbd>Delete</kbd> - Delete selected card</li>
+            </ul>
+        </details>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
